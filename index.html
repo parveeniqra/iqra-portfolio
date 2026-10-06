@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iqra Parveen | Computer Science & AI Developer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepSea: '#0F172A',
+                        oceanCard: '#1E293B',
+                        seaBorder: '#334155',
+                        seaCyan: '#38BDF8',
+                        seaTeal: '#2DD4BF',
+                        seaText: '#F8FAFC',
+                        seaMuted: '#94A3B8'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        /* Glass Card Effect for Sea Theme */
+        .sea-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .sea-card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .sea-card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        /* Dynamic Waveform Bars */
+        @keyframes wave {
+            0%, 100% { height: 8px; }
+            50% { height: 36px; }
+        }
+
+        .wave-bar {
+            animation: wave 1.2s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38BDF8;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-seaCyan selection:text-deepSea">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-deepSea/80 border-b border-seaBorder/60">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-seaCyan text-deepSea flex items-center justify-center font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
+                    IP
+                </div>
+                <div>
+                    <span class="font-bold tracking-tight text-seaText text-lg block leading-tight">Iqra Parveen</span>
+                    <span class="text-xs text-seaMuted font-mono">B.Tech CSE '29</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-seaMuted">
+                <a href="#who-i-am" class="hover:text-seaCyan transition-colors">Who I Am</a>
+                <a href="#skills" class="hover:text-seaCyan transition-colors">Skills</a>
+                <a href="#voiceguard" class="hover:text-seaCyan transition-colors">VoiceGuard AI</a>
+                <a href="#roadmap" class="hover:text-seaCyan transition-colors">Future Goals</a>
+            </div>
+
+            <!-- Action Button & AI Indicator -->
+            <div class="hidden md:flex items-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-oceanCard border border-seaBorder text-xs text-seaText font-medium">
+                    <span class="w-2 h-2 rounded-full bg-seaTeal animate-pulse"></span>
+                    <span>AI Portfolio</span>
+                </div>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-seaCyan text-deepSea font-semibold text-sm hover:bg-seaTeal transition-colors shadow-sm">
+                    Get in Touch
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="menu-btn" class="md:hidden text-seaText p-2 focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-deepSea border-b border-seaBorder px-6 py-6 flex-col gap-4 text-seaText font-medium">
+            <a href="#who-i-am" class="py-2 hover:text-seaCyan">Who I Am</a>
+            <a href="#skills" class="py-2 hover:text-seaCyan">Skills</a>
+            <a href="#voiceguard" class="py-2 hover:text-seaCyan">VoiceGuard AI</a>
+            <a href="#roadmap" class="py-2 hover:text-seaCyan">Future Goals</a>
+            <a href="#contact" class="mt-2 text-center py-3 rounded-full bg-seaCyan text-deepSea font-bold">Get in Touch</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Preserved original edited-image background) -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden bg-cover bg-center" style="background-image: url('edited-image.jpg');">
+        <div class="absolute inset-0 bg-gradient-to-r from-deepSea/95 via-deepSea/80 to-deepSea/40"></div>
+        <div class="relative max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Hero Content Container -->
+            <div class="lg:col-span-8 space-y-8">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full sea-card text-xs md:text-sm font-semibold text-seaText">
+                    <span class="px-2 py-0.5 rounded-md bg-seaCyan text-deepSea font-mono text-xs font-bold">CS STUDENT</span>
+                    <span>DBRAU Institute of Engineering & Technology, Agra</span>
+                </div>
+
+                <div class="space-y-4">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-seaText leading-[1.15]">
+                        Building the Future, <br>
+                        <span class="font-serif italic font-normal text-seaCyan">One Line of Code</span> at a Time.
+                    </h1>
+
+                    <!-- Dynamic Typing Text Visual -->
+                    <div class="flex items-center gap-2 text-lg md:text-xl font-medium text-seaMuted">
+                        <span>Specializing in</span>
+                        <span id="dynamic-text" class="font-mono text-seaTeal font-semibold border-b-2 border-seaTeal pb-0.5">Java Backend Development</span>
+                    </div>
+                </div>
+
+                <p class="text-base md:text-lg text-seaMuted max-w-2xl leading-relaxed">
+                    I am a Computer Science & Engineering student passionate about crafting robust backend architecture, solving complex DSA problems, and building intelligent Generative AI systems.
+                </p>
+
+                <!-- Hero CTAs -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#voiceguard" class="px-8 py-4 rounded-full bg-seaCyan text-deepSea font-bold text-sm hover:bg-seaTeal transition-all shadow-lg hover:shadow-seaCyan/20 flex items-center gap-3">
+                        <span>Explore VoiceGuard AI</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#skills" class="px-8 py-4 rounded-full sea-card text-seaText font-semibold text-sm hover:border-seaCyan transition-all">
+                        View Skills Matrix
+                    </a>
+                </div>
+
+                <!-- Academic Highlights Badge Row -->
+                <div class="pt-8 border-t border-seaBorder grid grid-cols-3 gap-6 max-w-lg">
+                    <div>
+                        <div class="text-2xl font-bold text-seaCyan font-mono">98%</div>
+                        <div class="text-xs text-seaMuted font-medium">Class 12 Mathematics</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-seaCyan font-mono">87%</div>
+                        <div class="text-xs text-seaMuted font-medium">Class 10 Score</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-seaCyan font-mono">2029</div>
+                        <div class="text-xs text-seaMuted font-medium">Graduation Year</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Card -->
+            <div class="lg:col-span-4">
+                <div class="sea-card rounded-3xl p-6 md:p-8 space-y-6">
+                    <div class="flex items-center justify-between pb-4 border-b border-seaBorder">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 rounded-full bg-seaTeal"></div>
+                            <span class="text-xs font-mono font-semibold text-seaMuted">CURRENT FOCUS</span>
+                        </div>
+                        <span class="text-xs font-mono text-seaCyan bg-deepSea/60 px-2.5 py-1 rounded-full border border-seaBorder">2026 Academic Year</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-2xl bg-deepSea/60 border border-seaBorder">
+                            <div class="text-xs text-seaCyan font-mono mb-1">PRIMARY STACK</div>
+                            <div class="font-bold text-seaText">Java, Spring Boot & REST APIs</div>
+                            <p class="text-xs text-seaMuted mt-1">Building backend architectures with relational DBMS and SQL.</p>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-deepSea/60 border border-seaBorder">
+                            <div class="text-xs text-seaCyan font-mono mb-1">FEATURED PROJECT</div>
+                            <div class="font-bold text-seaText">VoiceGuard AI Pipeline</div>
+                            <p class="text-xs text-seaMuted mt-1">Detecting synthetic voice cloning using React, Spring Boot & Python ML.</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex items-center justify-between text-xs text-seaMuted font-mono">
+                        <span>DBRAU Agra Campus</span>
+                        <span class="flex items-center gap-1 text-seaTeal">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Actively Learning
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 1: WHO I AM -->
+    <section id="who-i-am" class="py-24 relative bg-deepSea border-t border-seaBorder">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="max-w-2xl mb-16">
+                <span class="text-xs font-mono text-seaCyan uppercase tracking-wider font-bold">01 — Core Identity</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-seaText mt-2 tracking-tight">
+                    Curious by nature. <br>
+                    <span class="font-serif italic text-seaCyan font-normal">Persistent by choice.</span> Building with code.
+                </h2>
+            </div>
+
+            <!-- Grid Layout with Image Card Included -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Photo Showcase Card (Without Overlay Text) -->
+                <div class="lg:col-span-4 sea-card sea-card-hover rounded-3xl p-4 flex flex-col justify-between overflow-hidden">
+                    <div class="relative overflow-hidden rounded-2xl h-[400px]">
+                        <img src="profile.jpg" alt="Iqra Parveen" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105">
+                    </div>
+                </div>
+
+                <!-- Main Mindset Card -->
+                <div class="lg:col-span-8 sea-card sea-card-hover rounded-3xl p-8 md:p-10 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div class="w-12 h-12 rounded-2xl bg-deepSea flex items-center justify-center text-seaCyan border border-seaBorder">
+                            <i data-lucide="compass" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-seaText">Computer Science Student & Backend Builder</h3>
+                        <p class="text-seaMuted leading-relaxed text-base md:text-lg">
+                            I am a Computer Science & Engineering undergraduate at the Institute of Engineering & Technology, DBRAU Agra. Rather than collecting superficial certificates, my objective is to establish a rock-solid foundation in problem solving, Data Structures & Algorithms, Java backend ecosystems, and practical Generative AI applications.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-8 border-t border-seaBorder">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="cpu" class="w-5 h-5 text-seaCyan shrink-0 mt-0.5"></i>
+                            <div>
+                                <div class="font-bold text-sm text-seaText">System Design & DSA</div>
+                                <div class="text-xs text-seaMuted">Focusing on optimized algorithmic logic and Object-Oriented design.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-seaTeal shrink-0 mt-0.5"></i>
+                            <div>
+                                <div class="font-bold text-sm text-seaText">AI & Emerging Tech</div>
+                                <div class="text-xs text-seaMuted">Integrating voice classification and LLM prompt engineering.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2: MY SKILLS MATRIX -->
+    <section id="skills" class="py-24 bg-oceanCard/40 border-y border-seaBorder">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs font-mono text-seaCyan uppercase tracking-wider font-bold">02 — Technical Proficiency</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-seaText mt-2 tracking-tight">
+                        Honest Skills <span class="font-serif italic font-normal text-seaCyan">Matrix</span>
+                    </h2>
+                </div>
+                <p class="text-sm text-seaMuted max-w-md">
+                    Skills categorized with transparent status levels reflecting active project usage and ongoing academic study.
+                </p>
+            </div>
+
+            <!-- Skill Filter Categories Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Programming -->
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-seaBorder pb-4">
+                        <div class="p-2.5 rounded-xl bg-deepSea text-seaCyan border border-seaBorder">
+                            <i data-lucide="code-2" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-seaText text-lg">Programming</h3>
+                            <span class="text-xs text-seaMuted font-mono">Languages & Logic</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Java</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaCyan/10 text-seaCyan font-semibold">Developing Core</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">C Language</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">Working Knowledge</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Python Fundamentals</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaTeal/10 text-seaTeal font-semibold">Building AI Services</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Computer Science Core -->
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-seaBorder pb-4">
+                        <div class="p-2.5 rounded-xl bg-deepSea text-seaCyan border border-seaBorder">
+                            <i data-lucide="binary" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-seaText text-lg">Computer Science</h3>
+                            <span class="text-xs text-seaMuted font-mono">Theoretical Foundations</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Data Structures & Algo</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaCyan/10 text-seaCyan font-semibold">Active Focus</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">DBMS & SQL</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaTeal/10 text-seaTeal font-semibold">Developing</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">OOP & System Design</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">Working Knowledge</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Engineering -->
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-seaBorder pb-4">
+                        <div class="p-2.5 rounded-xl bg-deepSea text-seaCyan border border-seaBorder">
+                            <i data-lucide="server" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-seaText text-lg">Backend Stack</h3>
+                            <span class="text-xs text-seaMuted font-mono">Java Ecosystem</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Spring Boot & REST APIs</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaCyan/10 text-seaCyan font-semibold">Building VoiceGuard</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">JDBC & Maven</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaTeal/10 text-seaTeal font-semibold">Working Knowledge</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Postman & JUnit</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">API Testing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend Basics -->
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-seaBorder pb-4">
+                        <div class="p-2.5 rounded-xl bg-deepSea text-seaCyan border border-seaBorder">
+                            <i data-lucide="layout" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-seaText text-lg">Frontend Basics</h3>
+                            <span class="text-xs text-seaMuted font-mono">Interface Engineering</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">React.js</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaTeal/10 text-seaTeal font-semibold">Developing UI</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">HTML5 & CSS3</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">Working Knowledge</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">JavaScript (ES6+)</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">Working Knowledge</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Developer Tools -->
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-seaBorder pb-4">
+                        <div class="p-2.5 rounded-xl bg-deepSea text-seaCyan border border-seaBorder">
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-seaText text-lg">Developer Tools</h3>
+                            <span class="text-xs text-seaMuted font-mono">Environments & Containers</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Git & GitHub</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaCyan/10 text-seaCyan font-semibold">Version Control</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">IntelliJ IDEA & VS Code</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">Primary IDEs</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Docker</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaTeal/10 text-seaTeal font-semibold">Basic Containers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI & Intelligence -->
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-seaBorder pb-4">
+                        <div class="p-2.5 rounded-xl bg-deepSea text-seaCyan border border-seaBorder">
+                            <i data-lucide="bot" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-seaText text-lg">AI & Intelligence</h3>
+                            <span class="text-xs text-seaMuted font-mono">Machine Learning & LLMs</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Generative AI Fundamentals</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaCyan/10 text-seaCyan font-semibold">Course Study</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">Prompt Engineering</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-seaTeal/10 text-seaTeal font-semibold">Active Practice</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-deepSea/60 border border-seaBorder">
+                            <span class="font-bold text-sm text-seaText">ML Fundamentals</span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-oceanCard text-seaMuted">Theoretical Basis</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECT: VOICEGUARD AI -->
+    <section id="voiceguard" class="py-24 bg-deepSea">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="sea-card rounded-3xl p-8 md:p-12 overflow-hidden relative">
+                
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-seaCyan/10 text-seaCyan text-xs font-mono font-bold">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>PROJECT SPOTLIGHT</span>
+                    </div>
+                    <span class="text-xs font-mono text-seaMuted bg-deepSea/80 px-3 py-1 rounded-full border border-seaBorder">Status: Active Development</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <h2 class="text-3xl md:text-5xl font-bold text-seaText tracking-tight">
+                            VoiceGuard AI
+                        </h2>
+                        <p class="text-lg font-serif italic text-seaCyan">
+                            "Exploring the detection of AI-generated or cloned voices."
+                        </p>
+                        <p class="text-seaMuted leading-relaxed text-sm md:text-base">
+                            VoiceGuard AI is an ongoing architectural exploration designed to identify synthetic voice spoofing. The application allows users to record or upload voice clips, routing audio through a microservices pipeline to evaluate vocal authenticity.
+                        </p>
+
+                        <div class="space-y-3 pt-4">
+                            <span class="text-xs font-mono text-seaMuted font-bold block uppercase tracking-wider">Conceptual Architecture Pipeline</span>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs text-center">
+                                <div class="p-3 rounded-xl bg-deepSea/80 border border-seaBorder">
+                                    <div class="text-seaCyan font-bold">FRONTEND</div>
+                                    <div class="text-seaText font-semibold mt-1">React.js</div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-deepSea/80 border border-seaBorder">
+                                    <div class="text-seaTeal font-bold">BACKEND API</div>
+                                    <div class="text-seaText font-semibold mt-1">Spring Boot</div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-deepSea/80 border border-seaBorder">
+                                    <div class="text-seaCyan font-bold">AI SERVICE</div>
+                                    <div class="text-seaText font-semibold mt-1">Python ML</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="lg:col-span-6">
+                        <div class="bg-deepSea rounded-2xl p-6 text-seaText space-y-6 border border-seaBorder shadow-xl">
+                            <div class="flex items-center justify-between border-b border-seaBorder pb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-seaCyan animate-pulse"></span>
+                                    <span class="text-xs font-mono">VOICE ANALYSIS CONSOLE</span>
+                                </div>
+                                <span class="text-xs font-mono text-seaMuted">Sample: audio_test_04.wav</span>
+                            </div>
+
+                            <div class="h-28 bg-oceanCard rounded-xl p-4 flex items-center justify-center gap-1.5 overflow-hidden">
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.1s"></div>
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.3s"></div>
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.2s"></div>
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.5s"></div>
+                                <div class="w-1.5 bg-seaTeal rounded-full wave-bar" style="animation-delay: 0.4s"></div>
+                                <div class="w-1.5 bg-seaTeal rounded-full wave-bar" style="animation-delay: 0.1s"></div>
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.6s"></div>
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.2s"></div>
+                                <div class="w-1.5 bg-seaCyan rounded-full wave-bar" style="animation-delay: 0.3s"></div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+                                <div class="p-3 rounded-lg bg-deepSea/60 border border-seaBorder">
+                                    <div class="text-seaMuted">SPECTROGRAM</div>
+                                    <div class="text-seaText font-bold mt-0.5">Extracted</div>
+                                </div>
+                                <div class="p-3 rounded-lg bg-deepSea/60 border border-seaBorder">
+                                    <div class="text-seaMuted">AI CLASSIFIER</div>
+                                    <div class="text-seaCyan font-bold mt-0.5">Evaluating...</div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-seaMuted text-center font-mono">
+                                Note: Project actively under architectural development.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: MY FUTURE GOALS ROADMAP -->
+    <section id="roadmap" class="py-24 bg-oceanCard/30">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="max-w-2xl mb-16">
+                <span class="text-xs font-mono text-seaCyan uppercase tracking-wider font-bold">03 — Vision & Strategy</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-seaText mt-2 tracking-tight">
+                    Future <span class="font-serif italic font-normal text-seaCyan">Roadmap</span>
+                </h2>
+                <p class="text-seaMuted text-sm mt-2">
+                    A clear milestone strategy built on continuous learning and real-world execution.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-2xl font-mono font-bold text-seaCyan">01</span>
+                        <h3 class="font-bold text-seaText text-lg">CS Core & GATE Preparation</h3>
+                        <p class="text-xs text-seaMuted leading-relaxed">
+                            Strengthening Data Structures, Algorithms, DBMS, and Object-Oriented principles to crack GATE in 3rd year.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-seaBorder text-xs font-mono text-seaCyan font-semibold">
+                        CURRENT FOCUS
+                    </div>
+                </div>
+
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-2xl font-mono font-bold text-seaTeal">02</span>
+                        <h3 class="font-bold text-seaText text-lg">Backend Engineering Mastery</h3>
+                        <p class="text-xs text-seaMuted leading-relaxed">
+                            Building production-ready Java backend applications with Spring Boot, RESTful APIs, SQL databases, and JUnit testing.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-seaBorder text-xs font-mono text-seaTeal font-semibold">
+                        NEXT STEP
+                    </div>
+                </div>
+
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-2xl font-mono font-bold text-seaMuted">03</span>
+                        <h3 class="font-bold text-seaText text-lg">Open Source & Internships</h3>
+                        <p class="text-xs text-seaMuted leading-relaxed">
+                            Participating in hackathons (SIH), contributing to open-source software, aiming for GSoC, and securing internships.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-seaBorder text-xs font-mono text-seaMuted">
+                        TARGET: 2026-2027
+                    </div>
+                </div>
+
+                <div class="sea-card sea-card-hover rounded-3xl p-6 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-2xl font-mono font-bold text-seaMuted">04</span>
+                        <h3 class="font-bold text-seaText text-lg">AI-Integrated Software Engineer</h3>
+                        <p class="text-xs text-seaMuted leading-relaxed">
+                            Combining backend development, rigorous problem-solving, and Generative AI services to build impactful products.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-seaBorder text-xs font-mono text-seaMuted">
+                        LONG-TERM VISION
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact" class="bg-deepSea text-seaText py-16 border-t border-seaBorder">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
+            
+            <div class="space-y-2 text-center md:text-left">
+                <div class="text-2xl font-bold tracking-tight">Iqra Parveen</div>
+                <p class="text-xs text-seaMuted font-serif italic">"Building today. Preparing for tomorrow."</p>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="https://github.com/parveeniqra" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-oceanCard hover:bg-seaCyan hover:text-deepSea transition-colors text-seaText border border-seaBorder">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                </a>
+                <a href="https://linkedin.com/in/iqra-parveen-241aa3354" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-oceanCard hover:bg-seaCyan hover:text-deepSea transition-colors text-seaText border border-seaBorder">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </a>
+                <a href="mailto:contact@iqraparveen.dev" class="p-3 rounded-full bg-oceanCard hover:bg-seaCyan hover:text-deepSea transition-colors text-seaText border border-seaBorder">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 mt-12 pt-6 border-t border-seaBorder text-center text-xs text-seaMuted font-mono">
+            © 2026 Iqra Parveen • B.Tech Computer Science & Engineering
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        lucide.createIcons();
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        const dynamicText = document.getElementById('dynamic-text');
+        const phrases = [
+            "Java Backend Development",
+            "Data Structures & Algorithms",
+            "VoiceGuard AI Detection",
+            "Spring Boot REST APIs"
+        ];
+        let index = 0;
+
+        setInterval(() => {
+            index = (index + 1) % phrases.length;
+            dynamicText.style.opacity = '0';
+            setTimeout(() => {
+                dynamicText.textContent = phrases[index];
+                dynamicText.style.opacity = '1';
+            }, 300);
+        }, 3000);
+    </script>
+</body>
+</html>
